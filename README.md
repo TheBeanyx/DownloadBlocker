@@ -32,4 +32,4 @@ A **CyberGuard** egy jelszóval védett, modern Google Chrome böngészőbővít
 
 > **Ezzel a programmal NEM vállalunk felelőséget minden vírus megvédésétől. Ez csak egy biztonsági lépcső.**
 
-[Letöltés .ZIP fájlként](https://gitub.com/TheBeanyx/DownloadBlocker/archive/refs/tags/v1.03.zip)
+[Letöltés .ZIP fájlként](https://github.com/TheBeanyx/DownloadBlocker/archive/refs/tags/v1.03.zip)
