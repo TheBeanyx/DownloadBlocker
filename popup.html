@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg: #07090e;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --danger: #f43f5e;
+            --danger-hover: #e11d48;
+            --success: #10b981;
+            --success-hover: #059669;
+            --text: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            width: 310px;
+            margin: 0;
+            padding: 16px;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+            color: var(--text);
+            box-sizing: border-box;
+        }
+
+        /* Fejléc */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            background: linear-gradient(135deg, #818cf8, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+        .badge.active {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+        }
+        .badge.disabled {
+            background: rgba(244, 63, 94, 0.15);
+            color: #fb7185;
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            box-shadow: 0 0 12px rgba(244, 63, 94, 0.2);
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: var(--text);
+            font-size: 12px;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+            font-family: 'Outfit', sans-serif;
+        }
+        input[type="password"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-danger { background: var(--danger); color: white; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3); }
+        .btn-danger:hover { background: var(--danger-hover); }
+
+        .btn-success { background: var(--success); color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        .btn-success:hover { background: var(--success-hover); }
+
+        .btn-secondary { 
+            background: rgba(255, 255, 255, 0.05); 
+            color: var(--text); 
+            border: 1px solid var(--border); 
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .msg {
+            font-size: 10px;
+            text-align: center;
+            margin-top: 6px;
+            min-height: 14px;
+            font-weight: 500;
+        }
+        .error { color: #fb7185; }
+        .success { color: #34d399; }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand">
+            <span>🛡️</span> CyberGuard
+        </div>
+        <div id="statusPill" class="badge active">AKTÍV</div>
+    </div>
+
+    <div id="setupView" class="card hidden">
+        <span class="label">Állíts be egy védelmi jelszót</span>
+        <input type="password" id="regPass" placeholder="Biztonságos jelszó...">
+        <button id="regBtn" class="btn btn-primary">Mentés & Aktiválás</button>
+        <div id="regMsg" class="msg"></div>
+    </div>
+
+    <div id="mainView" class="card hidden">
+        <div class="row">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Védelem</span>
+            <button id="toggleBtn" class="btn btn-danger" style="width: auto; padding: 6px 14px;">Kikapcsolás</button>
+        </div>
+        <div id="authBox" class="hidden" style="margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
+            <input type="password" id="authPass" placeholder="Add meg a jelszót...">
+            <button id="authBtn" class="btn btn-danger">Megerősítés</button>
+        </div>
+        <div id="mainMsg" class="msg"></div>
+    </div>
+
+    <div id="overrideView" class="card hidden" style="margin-bottom: 0;">
+        <button id="showOverrideBtn" class="btn btn-secondary">⚡ Letöltés engedélyezése (1x)</button>
+        
+        <div id="overrideBox" class="hidden" style="margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
+            <span class="label" style="color: #fb7185;">Hitelesítés szükséges (60mp)</span>
+            <input type="password" id="overPass" placeholder="Mesterjelszó...">
+            <button id="overBtn" class="btn btn-success">Feloldás Most</button>
+        </div>
+        <div id="overMsg" class="msg"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
