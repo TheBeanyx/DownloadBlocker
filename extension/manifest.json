@@ -1,13 +1,17 @@
 {
   "manifest_version": 3,
   "name": "CyberGuard Download Blocker",
-  "version": "1.0.0",
-  "description": "Védelem és letöltés blokkoló szimuláció",
+  "version": "1.1.0",
+  "description": "Jelszóval védett letöltés-blokkoló és értesítő bővítmény",
   "permissions": [
     "downloads",
     "notifications",
     "storage"
   ],
+ "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
